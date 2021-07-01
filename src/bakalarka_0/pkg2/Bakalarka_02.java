@@ -9,6 +9,7 @@ public class Bakalarka_02 {
         long stopTime = System.currentTimeMillis();//pocitani za jak dlouho se vygeneruje uzel
         long elapsedTime = stopTime - startTime; //pocitani za jak dlouho se vygeneruje uzel
         System.out.println("Cas vypoctu :"+elapsedTime);
+        System.out.println("PIDAROS");
     }
     
 }
