@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class Panel extends JPanel{
     ArrayList<double[]> pointsD=new ArrayList<>(); //pole vygenerovaných bodů
     Knot k;
+    //tento panel slouží k vykreslení určitého uzlu - při generování se nevyužívá, tato komponenta slouží pro pozdější vizuální ověřování určitého uzlu
     public Panel(){
         this.setSize(800, 800);
         this.setPreferredSize(new Dimension(800,800));

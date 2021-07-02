@@ -6,6 +6,9 @@ import java.util.Arrays;
 public class Window extends javax.swing.JFrame {
 
     public Window() {
+        
+        //okno pro vykreslení panelu
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);

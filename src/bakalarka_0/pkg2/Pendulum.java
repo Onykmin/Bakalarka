@@ -1,6 +1,6 @@
 package bakalarka_0.pkg2;
 
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 
 public class Pendulum {
     int f;
@@ -12,7 +12,7 @@ public class Pendulum {
     
     public double getValue(double t){
         double out=0;
-        out=Math.cos(t*f+p);//spočítám pro ně fční hodnotu a připočtu jí k x-ové souřadnici
+        out=Math.cos(t*f+p); //vypočtu hodnotu pro dané t a vracím ji(využíváno při generování bodu)
         return out;
     }
     
