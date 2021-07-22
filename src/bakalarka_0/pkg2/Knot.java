@@ -26,7 +26,7 @@ public class Knot {
         this.z[0]=(new Pendulum(2,Math.PI/2));
         this.z[1]=(new Pendulum(1,Math.PI/4));
         init();
-        //uprava
+        //...
     }
     public Knot(Pendulum x,Pendulum y,Pendulum z1,Pendulum z2){ // - 4 vstupní parametry(kyvadla)
         this.x=x;
