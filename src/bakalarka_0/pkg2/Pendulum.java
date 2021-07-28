@@ -1,54 +1,23 @@
 package bakalarka_0.pkg2;
 
-//import java.math.BigDecimal;
+import ch.obermuhlner.math.big.BigDecimalMath;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+
 
 public class Pendulum {
     int f;
-    double p;
-    public Pendulum(int f, double p){//při vytváření kyvadla přijímám základní 2 parametry
+    BigDecimal p;
+    public Pendulum(int f, BigDecimal p){//při vytváření kyvadla přijímám základní 2 parametry
         this.f=f;
         this.p=p;
     }
     
-    public double getValue(double t){
-        double out=0;
-        out=Math.cos(t*f+p); //vypočtu hodnotu pro dané t a vracím ji(využíváno při generování bodu)
+    public BigDecimal getValue(BigDecimal t){
+        BigDecimal out=BigDecimal.ZERO;
+        out = BigDecimalMath.cos(t.multiply(BigDecimal.valueOf(f)).add(p), new MathContext(100, RoundingMode.HALF_EVEN));//vypočtu hodnotu pro dané t a vracím ji(využíváno při generování bodu)
         return out;
     }
-    
-//    private static final int SCALE = 30;
-//    private static final int ROUNDING_MODE = BigDecimal.ROUND_HALF_EVEN;
-//
-//    public static BigDecimal cosine(BigDecimal x) {
-//
-//        BigDecimal currentValue = BigDecimal.ONE;
-//        BigDecimal lastVal = currentValue.add(BigDecimal.ONE);
-//        BigDecimal xSquared = x.multiply(x);
-//        BigDecimal numerator = BigDecimal.ONE;
-//        BigDecimal denominator = BigDecimal.ONE;
-//        int i = 0;
-//
-//        while (lastVal.compareTo(currentValue) != 0) {
-//            lastVal = currentValue;
-//
-//            int z = 2 * i + 2;
-//
-//            denominator = denominator.multiply(BigDecimal.valueOf(z));
-//            denominator = denominator.multiply(BigDecimal.valueOf(z - 1));
-//            numerator = numerator.multiply(xSquared);
-//
-//            BigDecimal term = numerator.divide(denominator, SCALE + 5,
-//                    ROUNDING_MODE);
-//
-//            if (i % 2 != 0) {
-//                currentValue = currentValue.add(term);
-//            } else {
-//                currentValue = currentValue.subtract(term);
-//            }
-//            i++;
-//        }
-//
-//        return currentValue;
-//    }
 
 }

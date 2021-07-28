@@ -12,10 +12,10 @@ public class Window extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        Knot k=new Knot((new Pendulum(2,0)),(new Pendulum(13,Math.PI/4)),(new Pendulum(1,1.93386)),(new Pendulum(7,2.02910)));
-        this.panel1.addKnot(k);
-        System.out.println(k.toString());
-        System.out.println(Arrays.toString(k.toStringArray()));
+//        Knot k=new Knot((new Pendulum(2,0)),(new Pendulum(13,Math.PI/4)),(new Pendulum(1,1.93386)),(new Pendulum(7,2.02910)));
+//        this.panel1.addKnot(k);
+//        System.out.println(k.toString());
+//        System.out.println(Arrays.toString(k.toStringArray()));
         
     }
 

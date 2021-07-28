@@ -25,26 +25,26 @@ public class Panel extends JPanel{
     public void addKnot(Knot k){
         pointsD.clear();
         this.k=k;
-        generatePoints();
+        //generatePoints();
         this.repaint();
     }
     
-    public void generatePoints(){
-        double x=0;
-        double y=0;
-        boolean generuj=true;
-        double cas=0;
-        while(generuj){ //vždy předgeneruji 1000 bodů
-            x=(this.getWidth()/2)*k.x.getValue(cas);
-            y=(this.getHeight()/2)*k.y.getValue(cas);
-            pointsD.add(new double[]{x,y}); //přidání do pole/listu již vygenerovaných bodů
-            cas+=Math.PI/2000; //posun času
-            if(cas>=2*Math.PI){
-                generuj=false;
-                break;
-            }
-        }
-    }
+//    public void generatePoints(){
+//        double x=0;
+//        double y=0;
+//        boolean generuj=true;
+//        double cas=0;
+//        while(generuj){ //vždy předgeneruji 1000 bodů
+//            x=(this.getWidth()/2)*k.x.getValue(cas);
+//            y=(this.getHeight()/2)*k.y.getValue(cas);
+//            pointsD.add(new double[]{x,y}); //přidání do pole/listu již vygenerovaných bodů
+//            cas+=Math.PI/2000; //posun času
+//            if(cas>=2*Math.PI){
+//                generuj=false;
+//                break;
+//            }
+//        }
+//    }
     
     @Override
     public void paintComponent(Graphics g) {
@@ -80,9 +80,13 @@ public class Panel extends JPanel{
 //                for(int j=1;j<k.cross.get(i).size();j++)
 //                    g2d.draw(new Line2D.Double((this.getWidth()/2)*k.cross.get(i).get(j-1).x,(this.getHeight()/2)*k.cross.get(i).get(j-1).y,(this.getWidth()/2)*k.cross.get(i).get(j).x,(this.getHeight()/2)*k.cross.get(i).get(j).y));
 //            }
-            for(int i=0;i<k.odd.size();i++){
-                g2d.draw(new Line2D.Double((this.getWidth()/2)*k.odd.get(i).x,(this.getHeight()/2)*k.odd.get(i).y,(this.getWidth()/2)*k.odd.get(i).x,(this.getHeight()/2)*k.even.get(i).y));
-            }
+
+
+//            for(int i=0;i<k.odd.size();i++){
+//                g2d.draw(new Line2D.Double((this.getWidth()/2)*k.odd.get(i).x,(this.getHeight()/2)*k.odd.get(i).y,(this.getWidth()/2)*k.odd.get(i).x,(this.getHeight()/2)*k.even.get(i).y));
+//            }
+
+
         }
     }
 }

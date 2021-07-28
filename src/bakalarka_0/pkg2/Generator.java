@@ -10,8 +10,10 @@ import java.util.logging.Logger;
 public class Generator {
     
     public Generator(){
-        Knot k = new Knot();
-        evaluate();
+        Knot k;
+        for(int i=0;i<1000;i++)
+            k = new Knot();
+        //evaluate();
     }
     public void evaluate(){ 
         //funkce pro zapnutí knotscapu - jakmile je knotscape hotov vypíše "Ok". Tato zpráva se zachytí pokračuje se dále, pokud je přijatá zpráva rozdílná
