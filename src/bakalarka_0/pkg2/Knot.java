@@ -3,8 +3,9 @@ package bakalarka_0.pkg2;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Knot {
     Pendulum x; //kyvadlo pro x souřadnici
@@ -103,13 +104,13 @@ public class Knot {
     public void generatePairDT(){
         for(int i=0;i<times.size();i+=2){
             if(time1.contains(times.get(i))){
-                if(getZ(times.get(i)).compareTo(getZ(time2.get(time1.indexOf(times.get(i)))))==1){
+                if(compare(getZ(times.get(i)), getZ(time2.get(time1.indexOf(times.get(i)))))){
                     DT+=" "+(times.indexOf(time2.get(time1.indexOf(times.get(i))))+1);
                 }else{
                     DT+=" "+(times.indexOf(time2.get(time1.indexOf(times.get(i))))+1)*(-1);
                 }
             }else{
-                if(getZ(times.get(i)).compareTo(getZ(time1.get(time2.indexOf(times.get(i)))))==1){
+                if(compare(getZ(times.get(i)),getZ(time1.get(time2.indexOf(times.get(i)))))){
                     DT+=" "+(times.indexOf(time1.get(time2.indexOf(times.get(i))))+1);
                 }else{
                     DT+=" "+(times.indexOf(time1.get(time2.indexOf(times.get(i))))+1)*(-1);
@@ -118,9 +119,34 @@ public class Knot {
         }
     }
     
-    public BigDecimal round(BigDecimal d,int place) { //zaokrouhlování
-        return d.setScale(place, RoundingMode.HALF_UP);
-      }
+    public boolean compare(BigDecimal t1, BigDecimal t2){
+        boolean big = false;
+        if(t1.signum()==1 && t2.signum()==1){
+            if(t1.subtract(t2).signum()==1){
+                big=true;
+            }else{
+                big=false;
+            }
+        }else if(t1.signum()==-1 && t2.signum()==-1){
+            if(t1.negate().subtract(t2.negate()).signum()==1){
+                big=false;
+            }else{
+                big=true;
+            }
+        }else if(t1.signum()==1 && (t2.signum()!=1)){
+            big=true;
+        }else if(t1.signum()==-1 && (t2.signum()!=-1)){
+            big=false;
+        }else if(t1.signum()==0 && t2.signum()==1){
+            big=false;
+        }else if(t1.signum()==0 && t2.signum()==-1){
+            big=true;
+        }else{
+            try {throw new Exception("CHYBA");} 
+            catch (Exception ex){Logger.getLogger(Knot.class.getName()).log(Level.SEVERE, null, ex);}
+        }
+        return big;
+    }
     
     public Point3d getPoint(BigDecimal t,int id){ //vrací bod - vstupní parametry čas a ID bodu
         return new Point3d(x.getValue(t),y.getValue(t),z[0].getValue(t).add(z[1].getValue(t)),t,id);
