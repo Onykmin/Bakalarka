@@ -11,7 +11,7 @@ public class Generator {
     
     public Generator(){
         Knot k;
-        for(int i=0;i<1000000;i++)
+        for(int i=0;i<1;i++)
             k = new Knot();
         //evaluate();
     }
