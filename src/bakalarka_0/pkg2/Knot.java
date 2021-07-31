@@ -3,6 +3,7 @@ package bakalarka_0.pkg2;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,19 +60,16 @@ public class Knot {
             double k1 = y.f*k;
             double a = (double)(k1/x.f);
             double b = (double)y.p/Math.PI;
-            System.out.println(k1+" "+x.f);
-            System.out.println(a+" "+b);
-            int bottom = (int)Math.floor(1.0+(a+b));
+            int bottom = 1+(int)Math.floor((a+b));
             int top = (int)Math.floor(2*y.f-a+b);
-            System.out.println(bottom+" "+top);
             for(int j=bottom;j<=top;j++){
                 
                 double k2 = ((double)k/x.f);
                 double j1 = ((double)j/y.f);
                 double om = (y.p/y.f);
                 
-                double t1 =(((-k2)+j1)*Math.PI + om);
-                double t2 =(((k2)+j1)*Math.PI + om);
+                double t1 =(((-k2)+j1)*Math.PI - om);
+                double t2 =(((k2)+j1)*Math.PI - om);
                 
                 this.times.add(t1);
                 this.times.add(t2);
@@ -86,7 +84,7 @@ public class Knot {
             double k1 = x.f*k;
             double a = (double)(k1/y.f);
             double b = (double)x.p/Math.PI;
-            int bottom = (int)Math.floor(1.0+(a+b));
+            int bottom = 1+(int)Math.floor((a+b));
             int top = (int)Math.floor(2*x.f-a+b);
             for(int j=bottom;j<=top;j++){
                 
@@ -94,8 +92,8 @@ public class Knot {
                 double j1 = ((double)j/x.f);
                 double om = (x.p/x.f);
                 
-                double t1 =(((-k2)+j1)*Math.PI + om);
-                double t2 =(((k2)+j1)*Math.PI + om);
+                double t1 =(((-k2)+j1)*Math.PI - om);
+                double t2 =(((k2)+j1)*Math.PI - om);
                 
                 this.times.add(t1);
                 this.times.add(t2);
