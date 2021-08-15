@@ -1,12 +1,7 @@
 package bakalarka_0.pkg2;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Knot {
     Pendulum x; //kyvadlo pro x souřadnici
@@ -17,14 +12,14 @@ public class Knot {
     ArrayList<Double> times=new ArrayList<>();
     //pořadí bodů je závislé od vstupní proměnné(času - seřazený vzestupně)
     String DT=""; //DT kód jako jeden řetězec znaků
+    boolean err = false;
     //kontruktory
     public Knot(){ // - bezparametrický pro testování
-        this.x=(new Pendulum(2,0));
-        this.y=(new Pendulum(3,Math.PI/4));
-        this.z[0]=(new Pendulum(2,Math.PI/2));
-        this.z[1]=(new Pendulum(1,Math.PI/4));
+        this.x=(new Pendulum(3,0));
+        this.y=(new Pendulum(7,Math.PI/6));
+        this.z[0]=(new Pendulum(2,.57805));
+        this.z[1]=(new Pendulum(6,4.31026));
         init();
-        System.out.println(DT);
     }
     
     public Knot(Pendulum x,Pendulum y,Pendulum z1,Pendulum z2){ // - 4 vstupní parametry(kyvadla)
@@ -46,22 +41,28 @@ public class Knot {
     
     public void init(){ //inicializace - při vytvoření nového uzlu se vždy volá tato fce, vypočítá se alpha a pokud je nenulové vygeneruje se čas, body a nakonec se určí DT kód
         findPairs();
+        generatePairDT();
     }
     
     public void findPairs(){
         findPair1();
         findPair2();
         Collections.sort(times);
-        generatePairDT();
     }
     
     public void findPair1(){
         for(int k=1;k<x.f;k++){
             double k1 = y.f*k;
             double a = (double)(k1/x.f);
-            double b = (double)y.p/Math.PI;
+            double b = (double)(y.p)/(Math.PI);
             int bottom = 1+(int)Math.floor((a+b));
             int top = (int)Math.floor(2*y.f-a+b);
+            if(Math.abs((int)Math.round(a+b)-(a+b))<=10e-14 || Math.abs((int)Math.round(2*y.f-a+b)-(2*y.f-a+b))<=10e-14){
+                this.err=true;
+//                try{
+//                    throw new Exception("Podozrele blizko celemu cislu");
+//                }catch(Exception e){System.out.println("Vyskytla se chyba "+e.getMessage());}
+            }
             for(int j=bottom;j<=top;j++){
                 
                 double k2 = ((double)k/x.f);
@@ -86,6 +87,12 @@ public class Knot {
             double b = (double)x.p/Math.PI;
             int bottom = 1+(int)Math.floor((a+b));
             int top = (int)Math.floor(2*x.f-a+b);
+            if(Math.abs((int)Math.round(a+b)-(a+b))<=10e-14 || Math.abs((int)Math.round(2*x.f-a+b)-(2*x.f-a+b))<=10e-14){
+                this.err=true;
+//                try{
+//                    throw new Exception("Podozrele blizko celemu cislu");
+//                }catch(Exception e){System.out.println("Vyskytla se chyba "+e.getMessage());}
+            }
             for(int j=bottom;j<=top;j++){
                 
                 double k2 = ((double)k/y.f);
@@ -119,35 +126,6 @@ public class Knot {
                 }
             }
         }
-    }
-    
-    public boolean compare(BigDecimal t1, BigDecimal t2){
-        boolean big = false;
-        if(t1.signum()==1 && t2.signum()==1){
-            if(t1.subtract(t2).signum()==1){
-                big=true;
-            }else{
-                big=false;
-            }
-        }else if(t1.signum()==-1 && t2.signum()==-1){
-            if(t1.negate().subtract(t2.negate()).signum()==1){
-                big=false;
-            }else{
-                big=true;
-            }
-        }else if(t1.signum()==1 && (t2.signum()!=1)){
-            big=true;
-        }else if(t1.signum()==-1 && (t2.signum()!=-1)){
-            big=false;
-        }else if(t1.signum()==0 && t2.signum()==1){
-            big=false;
-        }else if(t1.signum()==0 && t2.signum()==-1){
-            big=true;
-        }else{
-            try {throw new Exception("CHYBA");} 
-            catch (Exception ex){Logger.getLogger(Knot.class.getName()).log(Level.SEVERE, null, ex);}
-        }
-        return big;
     }
     
     public Point3d getPoint(double t,int id){ //vrací bod - vstupní parametry čas a ID bodu

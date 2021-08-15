@@ -4,16 +4,33 @@ package bakalarka_0.pkg2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Generator {
-    
+    ArrayList<Knot> good = new ArrayList();
+    ArrayList<Knot> recalculate = new ArrayList();
+    File_access file = new File_access();
     public Generator(){
+        generate();
+    }
+    public void generate(){
+        file.CreateFile();
         Knot k;
-        for(int i=0;i<1;i++)
+        for(int i=0;i<1000;i++){
             k = new Knot();
-        //evaluate();
+            if(k.err){
+                recalculate.add(k);
+                System.out.println("chybny uzel ++");
+                break;
+            }
+            good.add(k);
+            file.saveDT(k.getNSCode());
+        }
+        file.closeBW();
+        System.out.println("KNOTSCAPE");
+        evaluate();
     }
     public void evaluate(){ 
         //funkce pro zapnutí knotscapu - jakmile je knotscape hotov vypíše "Ok". Tato zpráva se zachytí pokračuje se dále, pokud je přijatá zpráva rozdílná
