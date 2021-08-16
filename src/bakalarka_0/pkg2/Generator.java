@@ -18,7 +18,7 @@ public class Generator {
     public void generate(){
         file.CreateFile();
         Knot k;
-        for(int i=0;i<1000;i++){
+        for(int i=0;i<1;i++){
             k = new Knot();
             if(k.err){
                 recalculate.add(k);
