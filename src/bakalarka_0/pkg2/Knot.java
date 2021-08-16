@@ -1,6 +1,7 @@
 package bakalarka_0.pkg2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Knot {
