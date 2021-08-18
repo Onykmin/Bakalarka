@@ -60,6 +60,7 @@ public class Knot {
             int top = (int)Math.floor(2*y.f-a+b);
             if(Math.abs((int)Math.round(a+b)-(a+b))<=10e-14 || Math.abs((int)Math.round(2*y.f-a+b)-(2*y.f-a+b))<=10e-14){
                 this.err=true;
+                return;
 //                try{
 //                    throw new Exception("Podozrele blizko celemu cislu");
 //                }catch(Exception e){System.out.println("Vyskytla se chyba "+e.getMessage());}
@@ -90,6 +91,7 @@ public class Knot {
             int top = (int)Math.floor(2*x.f-a+b);
             if(Math.abs((int)Math.round(a+b)-(a+b))<=10e-14 || Math.abs((int)Math.round(2*x.f-a+b)-(2*x.f-a+b))<=10e-14){
                 this.err=true;
+                return;
 //                try{
 //                    throw new Exception("Podozrele blizko celemu cislu");
 //                }catch(Exception e){System.out.println("Vyskytla se chyba "+e.getMessage());}
@@ -114,12 +116,20 @@ public class Knot {
     public void generatePairDT(){
         for(int i=0;i<times.size();i+=2){
             if(time1.contains(times.get(i))){
+                if(Math.abs(getZ(times.get(i))-getZ(time2.get(time1.indexOf(times.get(i)))))<=10e-14){
+                    this.err=true;
+                    return;
+                }
                 if(getZ(times.get(i))>getZ(time2.get(time1.indexOf(times.get(i))))){
                     DT+=" "+(times.indexOf(time2.get(time1.indexOf(times.get(i))))+1);
                 }else{
                     DT+=" "+(times.indexOf(time2.get(time1.indexOf(times.get(i))))+1)*(-1);
                 }
             }else{
+                if(Math.abs(getZ(times.get(i))-getZ(time1.get(time2.indexOf(times.get(i)))))<=10e-14){
+                    this.err=true;
+                    return;
+                }
                 if(getZ(times.get(i))>getZ(time1.get(time2.indexOf(times.get(i))))){
                     DT+=" "+(times.indexOf(time1.get(time2.indexOf(times.get(i))))+1);
                 }else{
