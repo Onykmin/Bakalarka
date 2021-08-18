@@ -42,6 +42,7 @@ public class Generator {
             if(output.equalsIgnoreCase("Ok")){
                 //work in progress
             }else{
+                System.out.println(output);
                 throw new Exception("Chyba pri hledani uzlu");
             }
         }catch(IOException e){
