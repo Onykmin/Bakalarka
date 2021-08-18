@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 public class Generator {
     ArrayList<Knot> good = new ArrayList();
-    ArrayList<Knot> recalculate = new ArrayList();
     File_access file = new File_access();
     public Generator(){
         generate();
@@ -21,9 +20,9 @@ public class Generator {
         for(int i=0;i<1;i++){
             k = new Knot();
             if(k.err){
-                recalculate.add(k);
+                Knot_Big kb = new Knot_Big(k.x, k.y, k.z);
+                k.DT=kb.DT;
                 System.out.println("chybny uzel ++");
-                break;
             }
             good.add(k);
             file.saveDT(k.getNSCode());
