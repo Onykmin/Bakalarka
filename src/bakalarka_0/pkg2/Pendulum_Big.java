@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 public class Pendulum_Big {
     int f;
     BigDecimal p;
+    double A=1;
     public Pendulum_Big(int f, BigDecimal p){//při vytváření kyvadla přijímám základní 2 parametry
         this.f=f;
         this.p=p;

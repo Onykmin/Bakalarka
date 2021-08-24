@@ -28,14 +28,13 @@ public class Knot {
         this.y=y;
         this.z=new Pendulum[]{z1,z2};
         init();
-        
     } 
     
-    public Knot(int f1,double p1,int f2,double p2,int f3,double p3,int f4, double p4){ // - 8 parametrů(4 páry) každá dvojice pro jedno kyvadlo
+    public Knot(int f1,double p1,int f2,double p2,int f3,double p3,int f4, double p4,double A){ // - 8 parametrů(4 páry) každá dvojice pro jedno kyvadlo
         this.x=new Pendulum(f1,p1);
         this.y=new Pendulum(f2,p2);
         this.z[0]=new Pendulum(f3,p3);
-        this.z[1]=new Pendulum(f4,p4);
+        this.z[1]=new Pendulum(f4,p4,A);
         init();
     }
     //konstruktory
